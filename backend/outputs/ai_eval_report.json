@@ -1,0 +1,153 @@
+{
+  "provider": "mock",
+  "total": 24,
+  "passed": 24,
+  "schemaPass": 24,
+  "rows": [
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "normal",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "partial",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "partial",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "partial",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "partial",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "partial",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "partial",
+      "expected": "ok",
+      "actual": "ok",
+      "passed": true
+    },
+    {
+      "group": "insufficient",
+      "expected": "insufficient_evidence",
+      "actual": "insufficient_evidence",
+      "passed": true
+    },
+    {
+      "group": "insufficient",
+      "expected": "insufficient_evidence",
+      "actual": "insufficient_evidence",
+      "passed": true
+    },
+    {
+      "group": "insufficient",
+      "expected": "insufficient_evidence",
+      "actual": "insufficient_evidence",
+      "passed": true
+    },
+    {
+      "group": "insufficient",
+      "expected": "insufficient_evidence",
+      "actual": "insufficient_evidence",
+      "passed": true
+    },
+    {
+      "group": "refused",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "refused",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "refused",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "refused",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "refused",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "refused",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    }
+  ],
+  "boundary": "仅验证自建模拟输入与 Mock Provider 的输出边界，不代表真实业务准确率。"
+}
