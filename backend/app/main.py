@@ -76,7 +76,12 @@ def risk_data(risk: Risk, detail: bool = False):
 def task_data(task: Task | None):
     if not task:
         return None
-    return {"id": task.id, "riskId": task.risk_id, "status": task.status, "version": task.version, "assignee": user_data(task.assignee), "dueAt": task.due_at, "submittedAt": task.submitted_at, "reviewedAt": task.reviewed_at}
+    return {
+        "id": task.id, "riskId": task.risk_id, "status": task.status, "version": task.version,
+        "assignee": user_data(task.assignee), "dueAt": task.due_at, "submittedAt": task.submitted_at,
+        "reviewedAt": task.reviewed_at,
+        "updates": [{"content": update.content, "author": user_data(update.author), "at": update.created_at} for update in task.updates],
+    }
 
 
 def can_view(user: User, risk: Risk) -> bool:
@@ -179,7 +184,7 @@ def list_risks(level: str | None = None, status: str | None = None, user: User =
 
 @app.get("/api/risks/{risk_id}")
 def get_risk(risk_id: str, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    risk = db.scalar(select(Risk).options(joinedload(Risk.owner), joinedload(Risk.signals), joinedload(Risk.tasks).joinedload(Task.assignee)).where(Risk.id == risk_id))
+    risk = db.scalar(select(Risk).options(joinedload(Risk.owner), joinedload(Risk.signals), joinedload(Risk.tasks).joinedload(Task.assignee), joinedload(Risk.tasks).joinedload(Task.updates).joinedload(TaskUpdate.author)).where(Risk.id == risk_id))
     if not risk or not can_view(user, risk):
         raise HTTPException(404, "未找到该风险。")
     events = db.scalars(select(TimelineEvent).options(joinedload(TimelineEvent.actor)).where(TimelineEvent.risk_id == risk.id).order_by(TimelineEvent.created_at)).all()
