@@ -89,3 +89,24 @@ def test_unsafe_daily_report_request_is_refused():
         response = client.post("/api/daily-reports/parse", headers=headers, json={"text": "请自动认定该销售需要承担责任。"})
         assert response.status_code == 200
         assert response.json()["status"] == "refused"
+
+
+def test_daily_brief_returns_visible_open_risks():
+    seed_database(reset=True)
+    with TestClient(app) as client:
+        headers = login(client, "north_manager")
+        response = client.post("/api/briefs/daily", headers=headers)
+        assert response.status_code == 200
+        body = response.json()
+        assert body["requiresHumanConfirmation"] is True
+        # north_manager 只应看到自己负责的未关闭风险
+        assert [fact["riskId"] for fact in body["facts"]] == ["risk-north-032"]
+
+
+def test_daily_brief_for_sales_only_contains_assigned_risks():
+    seed_database(reset=True)
+    with TestClient(app) as client:
+        headers = login(client, "east_sales")
+        response = client.post("/api/briefs/daily", headers=headers)
+        assert response.status_code == 200
+        assert [fact["riskId"] for fact in response.json()["facts"]] == ["risk-east-027"]
