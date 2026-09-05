@@ -362,7 +362,7 @@ def recommendation(risk_id: str, user: User = Depends(get_current_user), db: Ses
 
 @app.post("/api/briefs/daily")
 def daily_brief(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    risks = db.scalars(select(Risk).options(joinedload(Risk.tasks)).where(Risk.status != "closed")).all()
+    risks = db.scalars(select(Risk).options(joinedload(Risk.tasks)).where(Risk.status != "closed")).unique().all()
     risks = [risk for risk in risks if can_view(user, risk)]
     output = {"status": "ok", "requiresHumanConfirmation": True, "facts": [{"riskId": risk.id, "text": risk.title, "status": risk.status} for risk in risks], "summary": f"当前共有 {len(risks)} 条未关闭风险，建议优先处理待确认和待复核事项。"}
     db.rollback()
